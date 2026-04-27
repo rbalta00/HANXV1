@@ -3,22 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Invitacion XV | Acceso Privado</title>
-  <meta name="description" content="Invitacion personalizada de XV anos para invitados." />
+  <title>Invitacion XV | Landing Completa</title>
+  <meta name="description" content="Invitacion completa de XV anos personalizada por enlace." />
   <style>
     :root {
-      --bg: #10070f;
-      --bg-soft: #1a0d19;
-      --rose: #ff8fc8;
-      --rose-soft: #ffc6e5;
-      --gold: #e8c674;
-      --gold-soft: #f6e2ad;
-      --text: #fff8fd;
-      --text-soft: #ead8e5;
-      --line: rgba(255, 214, 232, 0.35);
-      --card: rgba(255, 255, 255, 0.08);
+      --bg: #07111f;
+      --rose: #8cc8ff;
+      --rose-soft: #d7ecff;
+      --gold: #d7e9ff;
+      --gold-soft: #edf6ff;
+      --text: #f8fcff;
+      --text-soft: #d8e8f8;
+      --line: rgba(190, 224, 255, 0.4);
       --radius: 20px;
-      --shadow: 0 16px 42px rgba(0, 0, 0, 0.45);
+      --shadow: 0 16px 42px rgba(0, 0, 0, 0.5);
       --script: "Brush Script MT", "Segoe Script", cursive;
       --sans: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
     }
@@ -31,10 +29,10 @@
       font-family: var(--sans);
       color: var(--text);
       background:
-        radial-gradient(circle at 20% 12%, rgba(255, 117, 184, 0.2), transparent 40%),
-        radial-gradient(circle at 85% 20%, rgba(232, 198, 116, 0.17), transparent 35%),
-        radial-gradient(circle at 70% 85%, rgba(255, 143, 200, 0.16), transparent 36%),
-        linear-gradient(135deg, #09050a 0%, #130913 50%, #1a0d19 100%);
+        radial-gradient(circle at 20% 12%, rgba(149, 201, 255, 0.28), transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(202, 231, 255, 0.2), transparent 36%),
+        radial-gradient(circle at 70% 85%, rgba(123, 182, 244, 0.22), transparent 37%),
+        linear-gradient(135deg, #07101c 0%, #0b1a2d 55%, #102742 100%);
       overflow-x: hidden;
       position: relative;
     }
@@ -45,6 +43,42 @@
       pointer-events: none;
       z-index: 0;
       overflow: hidden;
+    }
+
+    .flowers,
+    .icon-rain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .flower {
+      position: absolute;
+      font-size: 16px;
+      opacity: 0.14;
+      animation: sway 16s linear infinite;
+    }
+
+    .rain-icon {
+      position: absolute;
+      font-size: 20px;
+      opacity: 0.42;
+      animation: rainFall linear infinite;
+      filter: drop-shadow(0 2px 6px rgba(180, 217, 255, 0.22));
+    }
+
+    @keyframes sway {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(10deg); }
+      100% { transform: translateY(0) rotate(0deg); }
+    }
+
+    @keyframes rainFall {
+      from { transform: translateY(-15vh) rotate(0deg); opacity: 0; }
+      15% { opacity: 0.48; }
+      to { transform: translateY(115vh) rotate(24deg); opacity: 0; }
     }
 
     .sparkle {
@@ -68,7 +102,7 @@
       margin: 0 auto;
       position: relative;
       z-index: 1;
-      padding-bottom: 32px;
+      padding: 10px 0 36px;
     }
 
     .hidden { display: none !important; }
@@ -104,8 +138,40 @@
       margin-bottom: 8px;
     }
 
+    .cover {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      background: linear-gradient(135deg, rgba(8, 24, 42, 0.92), rgba(10, 31, 54, 0.94));
+      backdrop-filter: blur(6px);
+      transition: 0.55s ease;
+    }
+
+    .cover.hide {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .cover-card {
+      width: min(680px, 100%);
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(255,255,255,0.13), rgba(255,255,255,0.05));
+      box-shadow: var(--shadow);
+      text-align: center;
+      padding: clamp(24px, 4vw, 42px);
+    }
+
+    .cover-card .name {
+      margin: 6px 0 14px;
+    }
+
     section {
-      margin: 14px 0;
+      margin: 12px 0;
       opacity: 0;
       transform: translateY(18px);
       transition: opacity 0.8s ease, transform 0.8s ease;
@@ -181,11 +247,11 @@
     .hero-meta {
       color: var(--text-soft);
       font-size: 1.05rem;
-      margin-bottom: 24px;
+      margin-bottom: 14px;
     }
 
     .vip-line {
-      margin: 0 auto 20px;
+      margin: 0 auto 18px;
       width: min(520px, 100%);
       border-radius: 14px;
       border: 1px solid rgba(246, 226, 173, 0.35);
@@ -226,8 +292,14 @@
 
     .btn.alt {
       color: #fff4fb;
-      background: linear-gradient(120deg, #d24c95, #ff9bcc);
-      box-shadow: 0 10px 24px rgba(255, 143, 200, 0.24);
+      background: linear-gradient(120deg, #6ca9e2, #a7d2ff);
+      box-shadow: 0 10px 24px rgba(129, 188, 247, 0.24);
+    }
+
+    .btn.soft {
+      color: #fff6fc;
+      background: linear-gradient(120deg, #2a5886, #4f84b8);
+      box-shadow: 0 10px 24px rgba(85, 142, 196, 0.24);
     }
 
     .content-pad { padding: clamp(20px, 3vw, 32px); }
@@ -293,6 +365,141 @@
       padding: 10px;
     }
 
+    .welcome-text,
+    .gift-text,
+    .note-text {
+      text-align: center;
+      color: var(--text-soft);
+      line-height: 1.75;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 1.15fr 1fr;
+      align-items: stretch;
+    }
+
+    .media-placeholder {
+      border-radius: 14px;
+      border: 1px dashed rgba(255, 208, 234, 0.6);
+      min-height: 250px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255, 143, 200, 0.12));
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: #ffd9ea;
+      font-weight: 700;
+      line-height: 1.5;
+      padding: 12px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .info-card {
+      border-radius: 14px;
+      border: 1px solid rgba(255, 215, 238, 0.3);
+      background: rgba(255,255,255,0.05);
+      padding: 15px 14px;
+    }
+
+    .info-card h3 {
+      color: #ffeabf;
+      margin-bottom: 6px;
+      font-size: 1.02rem;
+    }
+
+    .info-card p {
+      color: #ffddec;
+      line-height: 1.55;
+      font-size: 0.95rem;
+    }
+
+    .timeline {
+      max-width: 760px;
+      margin: 0 auto;
+      padding-left: 26px;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 4px;
+      bottom: 5px;
+      left: 7px;
+      width: 2px;
+      background: linear-gradient(180deg, rgba(232, 198, 116, 0.85), rgba(255, 143, 200, 0.65));
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 215, 237, 0.28);
+      background: rgba(255,255,255,0.05);
+      padding: 11px 12px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -24px;
+      top: 16px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff6dc 0%, #e8c674 50%, #d882b6 100%);
+      box-shadow: 0 0 10px rgba(232, 198, 116, 0.6);
+    }
+
+    .timeline-hour {
+      font-size: 0.84rem;
+      color: #ffd8ea;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 2px;
+      font-weight: 700;
+    }
+
+    .timeline-event {
+      color: #fff4fa;
+      font-weight: 600;
+    }
+
+    .location-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .location-card {
+      border-radius: 14px;
+      border: 1px solid rgba(255, 217, 238, 0.3);
+      background: rgba(255,255,255,0.05);
+      padding: 15px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .location-card h3 {
+      color: #ffe9be;
+    }
+
+    .location-card p {
+      color: #ffddec;
+      line-height: 1.55;
+      flex: 1;
+      font-size: 0.95rem;
+    }
+
     .rsvp-intro {
       text-align: center;
       color: var(--text-soft);
@@ -308,12 +515,40 @@
       margin-top: 10px;
     }
 
+    .music-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 14px;
+    }
+
     .status {
       text-align: center;
       margin-top: 12px;
       color: #ffe1f1;
       font-weight: 600;
       min-height: 20px;
+    }
+
+    .mobile-actions {
+      display: none;
+    }
+
+    .detail-list {
+      max-width: 760px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .detail-item {
+      border-radius: 12px;
+      border: 1px solid rgba(192, 225, 255, 0.35);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 10px 12px;
+      color: #e6f3ff;
+      font-size: 0.93rem;
+      line-height: 1.5;
     }
 
     footer {
@@ -331,13 +566,159 @@
       .wrapper { width: calc(100% - 16px); }
       .hero { min-height: 70vh; }
       .countdown-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero-grid,
+      .info-grid,
+      .location-grid,
+      .detail-list {
+        grid-template-columns: 1fr;
+      }
       .gallery-grid { grid-template-columns: 1fr; }
       .photo-placeholder { min-height: 140px; }
+      .btns .btn,
+      .rsvp-actions .btn {
+        width: 100%;
+      }
+      .content-pad {
+        padding: 16px 14px;
+      }
+      .mobile-actions {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 35;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        padding: 10px 10px calc(10px + env(safe-area-inset-bottom));
+        background: linear-gradient(180deg, rgba(8, 24, 42, 0), rgba(8, 24, 42, 0.92) 40%);
+      }
+      .mobile-actions .btn {
+        min-height: 48px;
+        font-size: 0.9rem;
+        padding: 12px;
+      }
+      footer {
+        padding-bottom: 84px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .cover-card {
+        padding: 20px 14px;
+      }
+      h1 {
+        font-size: clamp(1.65rem, 8.2vw, 2.05rem);
+      }
+      .name {
+        font-size: clamp(2rem, 12vw, 2.9rem);
+      }
+      .hero-meta {
+        font-size: 0.94rem;
+      }
+      .vip-line {
+        font-size: 0.88rem;
+        padding: 10px;
+      }
+      .section-title {
+        font-size: 1.25rem;
+      }
+      .count-num {
+        font-size: clamp(1.45rem, 9.5vw, 2rem);
+      }
+      .count-label {
+        font-size: 0.72rem;
+      }
+      .timeline-item {
+        padding: 10px;
+      }
+      .timeline-hour {
+        font-size: 0.77rem;
+      }
+      .timeline-event {
+        font-size: 0.93rem;
+      }
+      .detail-item,
+      .info-card p,
+      .location-card p,
+      .welcome-text,
+      .gift-text,
+      .note-text {
+        font-size: 0.9rem;
+      }
+      .mobile-actions {
+        gap: 7px;
+        padding-left: 8px;
+        padding-right: 8px;
+      }
+      .mobile-actions .btn {
+        min-height: 46px;
+        font-size: 0.86rem;
+      }
+    }
+
+    @media (min-width: 390px) and (max-width: 430px) {
+      .wrapper {
+        width: calc(100% - 14px);
+      }
+      .content-pad {
+        padding: 17px 15px;
+      }
+      .count-card {
+        padding: 13px 8px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .badge {
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+      }
+      .btn {
+        font-size: 0.84rem;
+        padding: 10px 14px;
+      }
+      .countdown-grid {
+        gap: 8px;
+      }
+      .count-card {
+        padding: 10px 6px;
+      }
+      .count-num {
+        font-size: 1.35rem;
+      }
+      .count-label {
+        letter-spacing: 0.05em;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sparkle,
+      .flower,
+      .rain-icon,
+      section,
+      .cover {
+        animation: none !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
 <body>
   <div class="sparkles" id="sparkles" aria-hidden="true"></div>
+  <div class="flowers" id="flowers" aria-hidden="true"></div>
+  <div class="icon-rain" id="iconRain" aria-hidden="true"></div>
+
+  <!-- Portada inicial -->
+  <section class="cover" id="coverScreen">
+    <article class="cover-card">
+      <p class="badge">Invitacion exclusiva</p>
+      <h1>Mis XV Anos</h1>
+      <p class="name">Hannia Victoria Romero Barra</p>
+      <p class="hero-meta">Una noche elegante e inolvidable</p>
+      <button class="btn" id="openInvitationBtn">Abrir invitacion</button>
+    </article>
+  </section>
 
   <section class="gate hidden" id="accessDenied">
     <article class="gate-card">
@@ -349,23 +730,36 @@
 
   <main class="wrapper hidden" id="invitationApp">
     <section class="hero lux-card reveal-on-scroll" id="inicio">
-      <div class="hero-content">
-        <p class="badge">Evento exclusivo</p>
-        <h1>Mis XV Anos</h1>
-        <!-- CAMBIAR NOMBRE -->
-        <p class="name">[NOMBRE DE LA QUINCEANERA]</p>
-        <!-- CAMBIAR FECHA Y LUGAR -->
-        <p class="hero-meta">[PONER FECHA] - [PONER LUGAR DEL EVENTO]</p>
-        <p class="vip-line">
-          Invitado: <strong id="guestName">Invitado VIP</strong><br />
-          Pases asignados: <strong id="guestPasses">1</strong><br />
-          Vigencia: <strong id="guestExpiry">No definida</strong>
-        </p>
-        <div class="btns">
-          <a href="#rsvp" class="btn">Confirmar asistencia</a>
-          <a href="#galeria" class="btn alt">Ver galeria</a>
+      <div class="hero-grid">
+        <div class="hero-content">
+          <p class="badge">Evento exclusivo</p>
+          <h1>Mis XV Anos</h1>
+          <p class="name">Hannia Victoria Romero Barra</p>
+          <p class="hero-meta">20 de mayo de 2026 - Templo de San Juan Aquiahuac</p>
+          <p class="vip-line">
+            Invitado: <strong id="guestName">Invitado VIP</strong><br />
+            Pases asignados: <strong id="guestPasses">1</strong><br />
+            Vigencia: <strong id="guestExpiry">No definida</strong>
+          </p>
+          <div class="btns">
+            <a href="#rsvp" class="btn">Confirmar asistencia</a>
+            <a href="#ubicaciones" class="btn alt">Ver ubicacion</a>
+          </div>
         </div>
+        <!-- AQUI VA VIDEO O FOTO PRINCIPAL -->
+        <aside class="media-placeholder">
+          AQUI VA VIDEO O FOTO PRINCIPAL<br />
+          Reemplaza este bloque por tu contenido
+        </aside>
       </div>
+    </section>
+
+    <section class="lux-card content-pad reveal-on-scroll" id="bienvenida">
+      <h2 class="section-title">Bienvenida</h2>
+      <p class="welcome-text">
+        Con mucha ilusion quiero compartir contigo una noche muy especial.
+        Tu presencia hara que este dia sea aun mas inolvidable.
+      </p>
     </section>
 
     <section class="lux-card content-pad countdown-wrap reveal-on-scroll" id="countdown">
@@ -375,6 +769,59 @@
         <article class="count-card"><span class="count-num" id="hours">00</span><span class="count-label">Horas</span></article>
         <article class="count-card"><span class="count-num" id="minutes">00</span><span class="count-label">Minutos</span></article>
         <article class="count-card"><span class="count-num" id="seconds">00</span><span class="count-label">Segundos</span></article>
+      </div>
+    </section>
+
+    <section class="lux-card content-pad reveal-on-scroll" id="informacion">
+      <h2 class="section-title">Informacion del evento</h2>
+      <div class="info-grid">
+        <article class="info-card">
+          <h3>Ceremonia</h3>
+          <p><strong>Hora:</strong> 4:00 PM</p>
+          <p><strong>Lugar:</strong> Templo de San Juan Aquiahuac</p>
+          <p><strong>Ubicacion:</strong> San Juan Aquiahuac, Tlaxcala</p>
+        </article>
+        <article class="info-card">
+          <h3>Recepcion</h3>
+          <p><strong>Hora:</strong> 5:00 PM</p>
+          <p><strong>Salon:</strong> Hotel Posada Senorial</p>
+          <p><strong>Ubicacion:</strong> Tlaxcala, Centro</p>
+        </article>
+        <article class="info-card">
+          <h3>Codigo de vestimenta</h3>
+          <p><strong>Formal / Elegante</strong></p>
+          <p>Evento de noche. Te esperamos con look elegante.</p>
+        </article>
+        <article class="info-card">
+          <h3>Datos familiares</h3>
+          <p><strong>Papa:</strong> Isaac Romero Baltazar</p>
+          <p><strong>Mama:</strong> Nidia Isis Barra Elias</p>
+          <p><strong>Padrinos:</strong> Yanin Romero Baltazar y Rodolfo Baltazar Herrera</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="lux-card content-pad reveal-on-scroll" id="detallesEspeciales">
+      <h2 class="section-title">Detalles especiales</h2>
+      <div class="detail-list">
+        <div class="detail-item"><strong>Fecha de nacimiento:</strong> 20 de mayo de 2011</div>
+        <div class="detail-item"><strong>Cumple XV:</strong> 20 de mayo de 2026</div>
+        <div class="detail-item"><strong>Confirmaciones:</strong> 2217445410</div>
+        <div class="detail-item"><strong>Tema:</strong> Azul baby premium</div>
+      </div>
+    </section>
+
+    <section class="lux-card content-pad reveal-on-scroll" id="itinerario">
+      <h2 class="section-title">Itinerario</h2>
+      <div class="timeline">
+        <article class="timeline-item"><p class="timeline-hour">4:00 PM</p><p class="timeline-event">Ceremonia religiosa</p></article>
+        <article class="timeline-item"><p class="timeline-hour">5:00 PM</p><p class="timeline-event">Recepcion de invitados</p></article>
+        <article class="timeline-item"><p class="timeline-hour">5:30 PM</p><p class="timeline-event">Entrada de la quinceanera</p></article>
+        <article class="timeline-item"><p class="timeline-hour">6:00 PM</p><p class="timeline-event">Vals</p></article>
+        <article class="timeline-item"><p class="timeline-hour">7:00 PM</p><p class="timeline-event">Cena</p></article>
+        <article class="timeline-item"><p class="timeline-hour">8:00 PM</p><p class="timeline-event">Brindis</p></article>
+        <article class="timeline-item"><p class="timeline-hour">8:30 PM</p><p class="timeline-event">Fiesta</p></article>
+        <article class="timeline-item"><p class="timeline-hour">1:00 AM</p><p class="timeline-event">Fin del evento</p></article>
       </div>
     </section>
 
@@ -392,6 +839,22 @@
       </div>
     </section>
 
+    <section class="lux-card content-pad reveal-on-scroll" id="ubicaciones">
+      <h2 class="section-title">Ubicaciones</h2>
+      <div class="location-grid">
+        <article class="location-card">
+          <h3>Ceremonia</h3>
+          <p>Consulta la ubicacion de la ceremonia para llegar a tiempo.</p>
+          <a class="btn soft" href="https://maps.app.goo.gl/fAt9jFwkWtLzG75V9" target="_blank" rel="noopener noreferrer">Ver ubicacion ceremonia</a>
+        </article>
+        <article class="location-card">
+          <h3>Recepcion</h3>
+          <p>Consulta la ubicacion de la recepcion para continuar la celebracion.</p>
+          <a class="btn soft" href="https://maps.app.goo.gl/XR9TbXqtpPBtTA586" target="_blank" rel="noopener noreferrer">Ver ubicacion recepcion</a>
+        </article>
+      </div>
+    </section>
+
     <section class="lux-card content-pad reveal-on-scroll" id="rsvp">
       <h2 class="section-title">Confirmacion de asistencia</h2>
       <p class="rsvp-intro">
@@ -403,20 +866,60 @@
       </div>
       <p class="status" id="formStatus" aria-live="polite"></p>
     </section>
+
+    <!-- ESTA SECCION ES OPCIONAL, PUEDES BORRARLA SI NO LA USAS -->
+    <section class="lux-card content-pad reveal-on-scroll" id="mesaRegalos">
+      <h2 class="section-title">Mesa de regalos</h2>
+      <p class="gift-text">
+        Tu presencia es el mejor regalo, pero si deseas tener un detalle conmigo, puedes hacerlo aqui.
+      </p>
+      <div class="btns" style="margin-top: 14px;">
+        <a class="btn soft" href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51990513" target="_blank" rel="noopener noreferrer">Ver mesa de regalos Liverpool</a>
+      </div>
+    </section>
+
+    <section class="lux-card content-pad reveal-on-scroll" id="notaImportante">
+      <h2 class="section-title">Nota importante</h2>
+      <p class="note-text">
+        Favor de confirmar asistencia antes del <strong>10 de mayo de 2026</strong>.
+        Invitacion personal e intransferible.
+      </p>
+      <div class="music-wrap">
+        <button class="btn soft" id="musicBtn">Reproducir musica</button>
+      </div>
+    </section>
   </main>
 
+  <nav class="mobile-actions" aria-label="Acciones rapidas">
+    <a class="btn" href="#rsvp">Confirmar</a>
+    <a class="btn alt" href="https://maps.app.goo.gl/XR9TbXqtpPBtTA586" target="_blank" rel="noopener noreferrer">Ubicacion</a>
+  </nav>
+
   <footer>
-    Gracias por formar parte de este momento inolvidable.
+    Gracias por formar parte de este momento inolvidable. Hannia Victoria Romero Barra - 20 de mayo de 2026.
   </footer>
+
+  <!-- MUSICA OPCIONAL -->
+  <!-- CAMBIAR src POR TU ARCHIVO MP3 -->
+  <audio id="bgMusic" src="[AQUI VA LINK O RUTA DEL MP3]" preload="none"></audio>
 
   <script>
     const CONFIG = {
       // CAMBIAR AL NUMERO DE QUIEN RECIBE CONFIRMACIONES
-      whatsappOrganizador: "[PONER NUMERO WHATSAPP ORGANIZADOR]",
+      whatsappOrganizador: "2217445410",
       // CAMBIAR FECHA DEL EVENTO (YYYY-MM-DDTHH:mm:ss)
-      fechaEvento: "2026-12-31T20:00:00",
-      quinceanera: "[NOMBRE DE LA QUINCEANERA]"
+      fechaEvento: "2026-05-20T16:00:00",
+      quinceanera: "Hannia Victoria Romero Barra"
     };
+
+    const coverScreen = document.getElementById("coverScreen");
+    const openInvitationBtn = document.getElementById("openInvitationBtn");
+    openInvitationBtn.addEventListener("click", function () {
+      coverScreen.classList.add("hide");
+      setTimeout(function () {
+        document.getElementById("inicio").scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 200);
+    });
 
     function decodeInvitePayload(token) {
       try {
@@ -471,6 +974,7 @@
 
     if (!hasValidPayload) {
       accessDenied.classList.remove("hidden");
+      coverScreen.classList.add("hide");
       if (accessReason === "expired") {
         gateMessage.textContent = "Este enlace ya vencio.";
         gateHint.textContent = "Solicita un nuevo link actualizado al organizador.";
@@ -577,9 +1081,31 @@
       }
     }
 
+    // Boton de musica opcional
+    const musicBtn = document.getElementById("musicBtn");
+    const bgMusic = document.getElementById("bgMusic");
+    let isPlaying = false;
+    musicBtn.addEventListener("click", async function () {
+      try {
+        if (!isPlaying) {
+          await bgMusic.play();
+          isPlaying = true;
+          musicBtn.textContent = "Pausar musica";
+        } else {
+          bgMusic.pause();
+          isPlaying = false;
+          musicBtn.textContent = "Reproducir musica";
+        }
+      } catch (error) {
+        formStatus.textContent = "Agrega un archivo MP3 valido para activar la musica.";
+      }
+    });
+
     // Detalles brillantes del fondo
     const sparklesContainer = document.getElementById("sparkles");
-    const sparkleCount = window.matchMedia("(max-width: 768px)").matches ? 16 : 28;
+    const flowersContainer = document.getElementById("flowers");
+    const iconRainContainer = document.getElementById("iconRain");
+    const sparkleCount = window.matchMedia("(max-width: 768px)").matches ? 8 : 22;
 
     for (let i = 0; i < sparkleCount; i += 1) {
       const sparkle = document.createElement("span");
@@ -592,6 +1118,35 @@
       sparkle.style.animationDuration = 12 + Math.random() * 16 + "s";
       sparkle.style.animationDelay = Math.random() * 8 + "s";
       sparklesContainer.appendChild(sparkle);
+    }
+
+    // Flores decorativas en fondo
+    const flowerIcons = ["❀", "✿", "❁", "❋", "✾"];
+    const flowerCount = window.matchMedia("(max-width: 768px)").matches ? 8 : 18;
+    for (let i = 0; i < flowerCount; i += 1) {
+      const flower = document.createElement("span");
+      flower.className = "flower";
+      flower.textContent = flowerIcons[Math.floor(Math.random() * flowerIcons.length)];
+      flower.style.left = Math.random() * 100 + "%";
+      flower.style.top = Math.random() * 100 + "%";
+      flower.style.fontSize = (10 + Math.random() * 12) + "px";
+      flower.style.animationDuration = (16 + Math.random() * 14) + "s";
+      flower.style.animationDelay = (Math.random() * 8) + "s";
+      flowersContainer.appendChild(flower);
+    }
+
+    // Lluvia de tazas, conejos y relojes
+    const rainIcons = ["☕", "🐇", "⏰"];
+    const rainCount = window.matchMedia("(max-width: 768px)").matches ? 5 : 10;
+    for (let i = 0; i < rainCount; i += 1) {
+      const rain = document.createElement("span");
+      rain.className = "rain-icon";
+      rain.textContent = rainIcons[Math.floor(Math.random() * rainIcons.length)];
+      rain.style.left = Math.random() * 100 + "%";
+      rain.style.animationDuration = (14 + Math.random() * 14) + "s";
+      rain.style.animationDelay = (Math.random() * 10) + "s";
+      rain.style.fontSize = (14 + Math.random() * 10) + "px";
+      iconRainContainer.appendChild(rain);
     }
   </script>
 </body>
