@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invitacion XV | Acceso Privado</title>
+  <meta name="description" content="Invitacion personalizada de XV anos para invitados." />
+  <style>
+    :root {
+      --bg: #10070f;
+      --bg-soft: #1a0d19;
+      --rose: #ff8fc8;
+      --rose-soft: #ffc6e5;
+      --gold: #e8c674;
+      --gold-soft: #f6e2ad;
+      --text: #fff8fd;
+      --text-soft: #ead8e5;
+      --line: rgba(255, 214, 232, 0.35);
+      --card: rgba(255, 255, 255, 0.08);
+      --radius: 20px;
+      --shadow: 0 16px 42px rgba(0, 0, 0, 0.45);
+      --script: "Brush Script MT", "Segoe Script", cursive;
+      --sans: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--sans);
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 12%, rgba(255, 117, 184, 0.2), transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(232, 198, 116, 0.17), transparent 35%),
+        radial-gradient(circle at 70% 85%, rgba(255, 143, 200, 0.16), transparent 36%),
+        linear-gradient(135deg, #09050a 0%, #130913 50%, #1a0d19 100%);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .sparkles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--gold-soft) 0%, rgba(255,255,255,0) 70%);
+      opacity: 0.5;
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(25vh) scale(0.8); opacity: 0; }
+      20% { opacity: 0.7; }
+      to { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+    }
+
+    .wrapper {
+      width: min(1100px, calc(100% - 28px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      padding-bottom: 32px;
+    }
+
+    .hidden { display: none !important; }
+
+    .gate {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .gate-card {
+      width: min(620px, 100%);
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.04));
+      box-shadow: var(--shadow);
+      padding: clamp(22px, 4vw, 34px);
+      text-align: center;
+    }
+
+    .gate-card h1 {
+      font-size: clamp(1.5rem, 4.4vw, 2.2rem);
+      margin-bottom: 10px;
+      color: var(--gold-soft);
+    }
+
+    .gate-card p {
+      color: var(--text-soft);
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+
+    section {
+      margin: 14px 0;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    section.reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .lux-card {
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+      backdrop-filter: blur(8px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      min-height: 78vh;
+      padding: clamp(24px, 4vw, 52px);
+      display: grid;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, rgba(255, 176, 218, 0.15), rgba(255, 230, 170, 0.08) 45%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 224, 243, 0.5);
+      color: var(--rose-soft);
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5.4vw, 3.6rem);
+      color: #ffe7f4;
+      margin-bottom: 8px;
+      text-shadow: 0 4px 18px rgba(255, 143, 200, 0.25);
+    }
+
+    .name {
+      font-family: var(--script);
+      font-size: clamp(2.8rem, 8vw, 5.4rem);
+      line-height: 1;
+      color: var(--gold-soft);
+      text-shadow: 0 5px 26px rgba(232, 198, 116, 0.35);
+      margin-bottom: 10px;
+    }
+
+    .hero-meta {
+      color: var(--text-soft);
+      font-size: 1.05rem;
+      margin-bottom: 24px;
+    }
+
+    .vip-line {
+      margin: 0 auto 20px;
+      width: min(520px, 100%);
+      border-radius: 14px;
+      border: 1px solid rgba(246, 226, 173, 0.35);
+      background: rgba(255, 255, 255, 0.06);
+      padding: 12px;
+      color: #ffe8f4;
+      line-height: 1.55;
+      font-size: 0.95rem;
+    }
+
+    .vip-line strong {
+      color: var(--gold-soft);
+    }
+
+    .btns {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .btn {
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      min-height: 46px;
+      border-radius: 999px;
+      padding: 12px 22px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: 0.25s ease;
+      color: #31141f;
+      background: linear-gradient(120deg, var(--gold), var(--gold-soft));
+      box-shadow: 0 10px 24px rgba(232, 198, 116, 0.26);
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn.alt {
+      color: #fff4fb;
+      background: linear-gradient(120deg, #d24c95, #ff9bcc);
+      box-shadow: 0 10px 24px rgba(255, 143, 200, 0.24);
+    }
+
+    .content-pad { padding: clamp(20px, 3vw, 32px); }
+
+    .section-title {
+      text-align: center;
+      color: var(--gold-soft);
+      margin-bottom: 14px;
+      font-size: clamp(1.3rem, 3.4vw, 2rem);
+      letter-spacing: 0.04em;
+    }
+
+    .countdown-wrap {
+      text-align: center;
+    }
+
+    .countdown-grid {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(80px, 1fr));
+      gap: 12px;
+    }
+
+    .count-card {
+      border-radius: 14px;
+      border: 1px solid rgba(246, 226, 173, 0.28);
+      background: rgba(255,255,255,0.05);
+      padding: 14px 10px;
+    }
+
+    .count-num {
+      display: block;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      color: #ffe8bd;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .count-label {
+      margin-top: 6px;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: #ffd9ec;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .photo-placeholder {
+      min-height: 170px;
+      border-radius: 14px;
+      border: 1px dashed rgba(255, 198, 229, 0.6);
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255, 143, 200, 0.12));
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: #ffd8ea;
+      font-weight: 600;
+      padding: 10px;
+    }
+
+    .rsvp-intro {
+      text-align: center;
+      color: var(--text-soft);
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .rsvp-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .status {
+      text-align: center;
+      margin-top: 12px;
+      color: #ffe1f1;
+      font-weight: 600;
+      min-height: 20px;
+    }
+
+    footer {
+      text-align: center;
+      color: #e6bfd3;
+      padding: 18px 12px 10px;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 900px) {
+      .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 680px) {
+      .wrapper { width: calc(100% - 16px); }
+      .hero { min-height: 70vh; }
+      .countdown-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .photo-placeholder { min-height: 140px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sparkles" id="sparkles" aria-hidden="true"></div>
+
+  <section class="gate hidden" id="accessDenied">
+    <article class="gate-card">
+      <h1>Invitacion privada</h1>
+      <p id="gateMessage">Este enlace es personal y requiere un codigo de invitado valido.</p>
+      <p id="gateHint">Solicita tu link personalizado para ver la invitacion.</p>
+    </article>
+  </section>
+
+  <main class="wrapper hidden" id="invitationApp">
+    <section class="hero lux-card reveal-on-scroll" id="inicio">
+      <div class="hero-content">
+        <p class="badge">Evento exclusivo</p>
+        <h1>Mis XV Anos</h1>
+        <!-- CAMBIAR NOMBRE -->
+        <p class="name">[NOMBRE DE LA QUINCEANERA]</p>
+        <!-- CAMBIAR FECHA Y LUGAR -->
+        <p class="hero-meta">[PONER FECHA] - [PONER LUGAR DEL EVENTO]</p>
+        <p class="vip-line">
+          Invitado: <strong id="guestName">Invitado VIP</strong><br />
+          Pases asignados: <strong id="guestPasses">1</strong><br />
+          Vigencia: <strong id="guestExpiry">No definida</strong>
+        </p>
+        <div class="btns">
+          <a href="#rsvp" class="btn">Confirmar asistencia</a>
+          <a href="#galeria" class="btn alt">Ver galeria</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="lux-card content-pad countdown-wrap reveal-on-scroll" id="countdown">
+      <h2 class="section-title">Cuenta regresiva</h2>
+      <div class="countdown-grid">
+        <article class="count-card"><span class="count-num" id="days">00</span><span class="count-label">Dias</span></article>
+        <article class="count-card"><span class="count-num" id="hours">00</span><span class="count-label">Horas</span></article>
+        <article class="count-card"><span class="count-num" id="minutes">00</span><span class="count-label">Minutos</span></article>
+        <article class="count-card"><span class="count-num" id="seconds">00</span><span class="count-label">Segundos</span></article>
+      </div>
+    </section>
+
+    <section class="lux-card content-pad reveal-on-scroll" id="galeria">
+      <h2 class="section-title">Galeria</h2>
+      <div class="gallery-grid">
+        <!-- AQUI VA FOTO 1 -->
+        <figure class="photo-placeholder">AQUI VA FOTO 1</figure>
+        <!-- AQUI VA FOTO 2 -->
+        <figure class="photo-placeholder">AQUI VA FOTO 2</figure>
+        <!-- AQUI VA FOTO 3 -->
+        <figure class="photo-placeholder">AQUI VA FOTO 3</figure>
+        <!-- AQUI VA FOTO 4 -->
+        <figure class="photo-placeholder">AQUI VA FOTO 4</figure>
+      </div>
+    </section>
+
+    <section class="lux-card content-pad reveal-on-scroll" id="rsvp">
+      <h2 class="section-title">Confirmacion de asistencia</h2>
+      <p class="rsvp-intro">
+        Confirma por WhatsApp en un toque.
+      </p>
+      <div class="rsvp-actions">
+        <a class="btn" id="btnConfirmYes" href="#" target="_blank" rel="noopener noreferrer">Si asistire</a>
+        <a class="btn alt" id="btnConfirmNo" href="#" target="_blank" rel="noopener noreferrer">No podre asistir</a>
+      </div>
+      <p class="status" id="formStatus" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer>
+    Gracias por formar parte de este momento inolvidable.
+  </footer>
+
+  <script>
+    const CONFIG = {
+      // CAMBIAR AL NUMERO DE QUIEN RECIBE CONFIRMACIONES
+      whatsappOrganizador: "[PONER NUMERO WHATSAPP ORGANIZADOR]",
+      // CAMBIAR FECHA DEL EVENTO (YYYY-MM-DDTHH:mm:ss)
+      fechaEvento: "2026-12-31T20:00:00",
+      quinceanera: "[NOMBRE DE LA QUINCEANERA]"
+    };
+
+    function decodeInvitePayload(token) {
+      try {
+        const normalized = token.replace(/-/g, "+").replace(/_/g, "/");
+        const padded = normalized + "=".repeat((4 - (normalized.length % 4)) % 4);
+        const binary = window.atob(padded);
+        const bytes = Uint8Array.from(binary, (ch) => ch.charCodeAt(0));
+        const json = new TextDecoder().decode(bytes);
+        return JSON.parse(json);
+      } catch (error) {
+        return null;
+      }
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("i");
+    const payload = token ? decodeInvitePayload(token) : null;
+
+    const accessDenied = document.getElementById("accessDenied");
+    const invitationApp = document.getElementById("invitationApp");
+    const gateMessage = document.getElementById("gateMessage");
+    const gateHint = document.getElementById("gateHint");
+    const guestName = document.getElementById("guestName");
+    const guestPasses = document.getElementById("guestPasses");
+    const guestExpiry = document.getElementById("guestExpiry");
+    const btnConfirmYes = document.getElementById("btnConfirmYes");
+    const btnConfirmNo = document.getElementById("btnConfirmNo");
+    const formStatus = document.getElementById("formStatus");
+    const nowTs = Date.now();
+
+    function getReason(payloadData, hasToken) {
+      if (!hasToken) {
+        return "preview";
+      }
+      if (!payloadData || !payloadData.n || !payloadData.p) {
+        return "invalid";
+      }
+      if (payloadData.exp && Number(payloadData.exp) < nowTs) {
+        return "expired";
+      }
+      if (payloadData.one && payloadData.c) {
+        const alreadyUsed = localStorage.getItem("invite-used-" + payloadData.c) === "1";
+        if (alreadyUsed) {
+          return "used";
+        }
+      }
+      return "ok";
+    }
+
+    const accessReason = getReason(payload, Boolean(token));
+    const hasValidPayload = accessReason === "ok" || accessReason === "preview";
+
+    if (!hasValidPayload) {
+      accessDenied.classList.remove("hidden");
+      if (accessReason === "expired") {
+        gateMessage.textContent = "Este enlace ya vencio.";
+        gateHint.textContent = "Solicita un nuevo link actualizado al organizador.";
+      } else if (accessReason === "used") {
+        gateMessage.textContent = "Este enlace ya fue utilizado.";
+        gateHint.textContent = "Cada invitacion permite una sola confirmacion.";
+      } else {
+        gateMessage.textContent = "Este enlace es personal y requiere un codigo de invitado valido.";
+        gateHint.textContent = "Solicita tu link personalizado para ver la invitacion.";
+      }
+    } else {
+      invitationApp.classList.remove("hidden");
+      if (accessReason === "preview") {
+        guestName.textContent = "Invitado especial";
+        guestPasses.textContent = "1";
+        guestExpiry.textContent = "Modo vista previa";
+      } else {
+        guestName.textContent = payload.n;
+        guestPasses.textContent = payload.p;
+        if (payload.exp) {
+          guestExpiry.textContent = new Date(Number(payload.exp)).toLocaleString();
+        }
+      }
+    }
+
+    // Animacion de entrada suave
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("reveal");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll(".reveal-on-scroll").forEach((section) => {
+      observer.observe(section);
+    });
+
+    // Cuenta regresiva grande
+    const daysEl = document.getElementById("days");
+    const hoursEl = document.getElementById("hours");
+    const minutesEl = document.getElementById("minutes");
+    const secondsEl = document.getElementById("seconds");
+    const targetDate = new Date(CONFIG.fechaEvento).getTime();
+
+    function renderCountdown() {
+      const now = Date.now();
+      const diff = targetDate - now;
+      if (diff <= 0) {
+        daysEl.textContent = "00";
+        hoursEl.textContent = "00";
+        minutesEl.textContent = "00";
+        secondsEl.textContent = "00";
+        return;
+      }
+
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const m = Math.floor((diff / (1000 * 60)) % 60);
+      const s = Math.floor((diff / 1000) % 60);
+
+      daysEl.textContent = String(d).padStart(2, "0");
+      hoursEl.textContent = String(h).padStart(2, "0");
+      minutesEl.textContent = String(m).padStart(2, "0");
+      secondsEl.textContent = String(s).padStart(2, "0");
+    }
+
+    renderCountdown();
+    setInterval(renderCountdown, 1000);
+
+    if (hasValidPayload) {
+      const hostPhone = String(CONFIG.whatsappOrganizador || "").replace(/[^\d]/g, "");
+      const nameSafe = accessReason === "preview" ? "Invitado especial" : payload.n;
+      const passesSafe = accessReason === "preview" ? "1" : payload.p;
+      const codeSafe = accessReason === "preview" ? "PREVIEW" : (payload.c || "SIN-CODIGO");
+
+      const msgYes = encodeURIComponent(
+        "Hola, confirmo mi asistencia a los XV anos de " + CONFIG.quinceanera +
+        ". Mi nombre es " + nameSafe +
+        ", pases: " + passesSafe +
+        ", codigo: " + codeSafe + "."
+      );
+      const msgNo = encodeURIComponent(
+        "Hola, gracias por la invitacion a los XV anos de " + CONFIG.quinceanera +
+        ". Soy " + nameSafe +
+        " y lamentablemente no podre asistir. Codigo: " + codeSafe + "."
+      );
+
+      if (hostPhone) {
+        btnConfirmYes.href = "https://wa.me/" + hostPhone + "?text=" + msgYes;
+        btnConfirmNo.href = "https://wa.me/" + hostPhone + "?text=" + msgNo;
+        const markAsUsed = function () {
+          if (accessReason !== "preview" && payload.one && payload.c) {
+            localStorage.setItem("invite-used-" + payload.c, "1");
+          }
+        };
+        btnConfirmYes.addEventListener("click", markAsUsed);
+        btnConfirmNo.addEventListener("click", markAsUsed);
+      } else {
+        btnConfirmYes.href = "#";
+        btnConfirmNo.href = "#";
+        formStatus.textContent = "Falta configurar el numero de WhatsApp del organizador.";
+      }
+    }
+
+    // Detalles brillantes del fondo
+    const sparklesContainer = document.getElementById("sparkles");
+    const sparkleCount = window.matchMedia("(max-width: 768px)").matches ? 16 : 28;
+
+    for (let i = 0; i < sparkleCount; i += 1) {
+      const sparkle = document.createElement("span");
+      sparkle.className = "sparkle";
+      const size = 3 + Math.random() * 6;
+      sparkle.style.width = size + "px";
+      sparkle.style.height = size + "px";
+      sparkle.style.left = Math.random() * 100 + "%";
+      sparkle.style.top = Math.random() * 100 + "%";
+      sparkle.style.animationDuration = 12 + Math.random() * 16 + "s";
+      sparkle.style.animationDelay = Math.random() * 8 + "s";
+      sparklesContainer.appendChild(sparkle);
+    }
+  </script>
+</body>
+</html>

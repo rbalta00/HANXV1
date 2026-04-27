@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generador Privado | Invitaciones XV</title>
+  <style>
+    :root {
+      --bg: #130914;
+      --rose: #ff9ed1;
+      --gold: #e8c674;
+      --text: #fff6fb;
+      --text-soft: #e8d0df;
+      --card: rgba(255,255,255,0.08);
+      --line: rgba(255, 210, 235, 0.34);
+      --radius: 18px;
+      --sans: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--sans);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(255, 122, 194, 0.2), transparent 36%),
+        radial-gradient(circle at 85% 8%, rgba(232, 198, 116, 0.2), transparent 30%),
+        linear-gradient(135deg, #09050a, #120812 55%, #190d19);
+      color: var(--text);
+      padding: 20px;
+    }
+
+    .panel {
+      width: min(860px, 100%);
+      margin: 0 auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+      padding: clamp(18px, 3vw, 30px);
+      box-shadow: 0 16px 38px rgba(0,0,0,0.45);
+    }
+
+    h1 {
+      font-size: clamp(1.45rem, 3.6vw, 2.2rem);
+      margin-bottom: 8px;
+      color: #ffe8f6;
+    }
+
+    .intro {
+      color: var(--text-soft);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .notice {
+      border: 1px solid rgba(232, 198, 116, 0.45);
+      background: rgba(232, 198, 116, 0.12);
+      color: #ffe9bb;
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 16px;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #ffe3f2;
+      font-size: 0.91rem;
+    }
+
+    .field input {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 213, 235, 0.3);
+      background: rgba(255,255,255,0.08);
+      color: #fff7fc;
+      padding: 11px 12px;
+      font: inherit;
+      outline: none;
+    }
+
+    .field input:focus {
+      border-color: rgba(232, 198, 116, 0.75);
+      box-shadow: 0 0 0 3px rgba(232, 198, 116, 0.2);
+    }
+
+    .span-2 { grid-column: span 2; }
+
+    .actions {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 11px 18px;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #2d1320;
+      background: linear-gradient(120deg, var(--gold), #f5e2af);
+    }
+
+    .btn.alt {
+      color: #fff7fc;
+      background: linear-gradient(120deg, #d65297, #ff9fd1);
+    }
+
+    .result {
+      margin-top: 16px;
+      border: 1px solid rgba(255, 209, 233, 0.35);
+      border-radius: 12px;
+      padding: 10px;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .result label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.86rem;
+      color: #f7d8e9;
+      font-weight: 600;
+    }
+
+    .result input {
+      width: 100%;
+      border: 1px solid rgba(255, 223, 239, 0.3);
+      border-radius: 10px;
+      background: rgba(0,0,0,0.25);
+      color: #fff7fd;
+      padding: 10px;
+      font: inherit;
+    }
+
+    .status {
+      margin-top: 10px;
+      color: #ffe3f1;
+      min-height: 20px;
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 740px) {
+      .grid { grid-template-columns: 1fr; }
+      .span-2 { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+  <main class="panel">
+    <h1>Generador privado de invitaciones</h1>
+    <p class="intro">
+      Este archivo es para ti. Aqui generas enlaces unicos por invitado con nombre, pases y numero de WhatsApp del invitado.
+    </p>
+    <p class="notice">
+      Importante: en hosting estatico (Vercel) el enlace es privado por URL unica, pero no es seguridad bancaria.
+      No compartas links fuera de tus invitados.
+    </p>
+
+    <form id="generatorForm">
+      <div class="grid">
+        <div class="field">
+          <label for="guestName">Nombre del invitado</label>
+          <input id="guestName" required placeholder="Ej. Carlos Perez" />
+        </div>
+        <div class="field">
+          <label for="guestPasses">Numero de pases</label>
+          <input id="guestPasses" type="number" min="1" required placeholder="Ej. 2" />
+        </div>
+
+        <div class="field">
+          <label for="guestPhone">WhatsApp del invitado</label>
+          <input id="guestPhone" required placeholder="Ej. 5215512345678" />
+        </div>
+        <div class="field">
+          <label for="baseUrl">Link base de la invitacion</label>
+          <input id="baseUrl" required />
+        </div>
+        <div class="field">
+          <label for="expiresAt">Caduca el (fecha y hora)</label>
+          <input id="expiresAt" type="datetime-local" required />
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn">Generar link</button>
+        <button type="button" class="btn alt" id="sendWhatsappBtn">Enviar por WhatsApp</button>
+        <button type="button" class="btn" id="copyBtn">Copiar link</button>
+      </div>
+    </form>
+
+    <div class="result">
+      <label for="generatedLink">Link personalizado generado</label>
+      <input id="generatedLink" readonly placeholder="Aqui aparecera el link generado" />
+    </div>
+    <p class="status" id="status"></p>
+  </main>
+
+  <script>
+    const form = document.getElementById("generatorForm");
+    const guestNameInput = document.getElementById("guestName");
+    const guestPassesInput = document.getElementById("guestPasses");
+    const guestPhoneInput = document.getElementById("guestPhone");
+    const baseUrlInput = document.getElementById("baseUrl");
+    const expiresAtInput = document.getElementById("expiresAt");
+    const generatedLinkInput = document.getElementById("generatedLink");
+    const sendWhatsappBtn = document.getElementById("sendWhatsappBtn");
+    const copyBtn = document.getElementById("copyBtn");
+    const status = document.getElementById("status");
+
+    if (window.location.protocol === "file:") {
+      baseUrlInput.value = "https://TU-DOMINIO.com/invitacion.html";
+    } else {
+      baseUrlInput.value = window.location.origin + "/invitacion.html";
+    }
+    const defaultExpiration = new Date(Date.now() + 1000 * 60 * 60 * 24 * 30);
+    expiresAtInput.value = defaultExpiration.toISOString().slice(0, 16);
+
+    function normalizeBaseUrl(url) {
+      const trimmed = url.trim();
+      if (!trimmed) {
+        return "";
+      }
+      if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
+        try {
+          const parsed = new URL(trimmed);
+          return parsed.toString();
+        } catch (error) {
+          return "";
+        }
+      }
+      try {
+        const parsed = new URL(trimmed, window.location.href);
+        return parsed.toString();
+      } catch (error) {
+        return "";
+      }
+    }
+
+    function encodeInvitePayload(payload) {
+      const json = JSON.stringify(payload);
+      const bytes = new TextEncoder().encode(json);
+      let binary = "";
+      bytes.forEach((byte) => {
+        binary += String.fromCharCode(byte);
+      });
+      return window.btoa(binary).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/g, "");
+    }
+
+    function isShareableHttpUrl(url) {
+      return url.startsWith("https://") || url.startsWith("http://");
+    }
+
+    function buildInviteLink() {
+      const name = guestNameInput.value.trim();
+      const passes = guestPassesInput.value.trim();
+      const phone = guestPhoneInput.value.trim().replace(/[^\d]/g, "");
+      const baseUrl = normalizeBaseUrl(baseUrlInput.value);
+      const expiresAt = expiresAtInput.value;
+      const expiresMs = new Date(expiresAt).getTime();
+
+      if (!name || !passes || !phone || !baseUrl || !expiresAt || Number.isNaN(expiresMs)) {
+        return null;
+      }
+
+      const payload = {
+        n: name,
+        p: passes,
+        w: phone,
+        c: "INV-" + Math.random().toString(36).slice(2, 8).toUpperCase(),
+        exp: expiresMs,
+        one: 1
+      };
+
+      const token = encodeInvitePayload(payload);
+      const separator = baseUrl.includes("?") ? "&" : "?";
+      const link = baseUrl + separator + "i=" + encodeURIComponent(token);
+
+      return { link, payload, phone };
+    }
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      const generated = buildInviteLink();
+      if (!generated) {
+        status.textContent = "Completa todos los campos con datos validos.";
+        return;
+      }
+      generatedLinkInput.value = generated.link;
+      const expiresText = new Date(generated.payload.exp).toLocaleString();
+      if (isShareableHttpUrl(generated.link)) {
+        status.textContent = "Link generado correctamente. Caduca: " + expiresText;
+      } else {
+        status.textContent = "Link generado, pero no es compartible por WhatsApp. Usa un dominio https://...";
+      }
+    });
+
+    copyBtn.addEventListener("click", async function () {
+      if (!generatedLinkInput.value) {
+        status.textContent = "Primero genera un link.";
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(generatedLinkInput.value);
+        status.textContent = "Link copiado al portapapeles.";
+      } catch (error) {
+        status.textContent = "No se pudo copiar automaticamente. Copialo manualmente.";
+      }
+    });
+
+    sendWhatsappBtn.addEventListener("click", function () {
+      const generated = buildInviteLink();
+      if (!generated) {
+        status.textContent = "Completa todos los campos para enviar por WhatsApp.";
+        return;
+      }
+
+      generatedLinkInput.value = generated.link;
+      const plainLink = generated.link.trim();
+      if (!isShareableHttpUrl(plainLink)) {
+        status.textContent = "WhatsApp solo permite links web (http/https). Cambia 'Link base' por tu URL publica.";
+        return;
+      }
+      const messageText =
+        "Hola " + generated.payload.n + ", te comparto tu invitacion personalizada de XV anos." +
+        "\n\n" +
+        "Tu enlace personal es:" +
+        "\n" +
+        plainLink +
+        "\n\n" +
+        "Este link es personal.";
+      const message = encodeURIComponent(messageText);
+      const waUrl = "https://wa.me/" + generated.phone + "?text=" + message;
+      window.open(waUrl, "_blank", "noopener,noreferrer");
+      status.textContent = "Abriendo WhatsApp con mensaje listo para enviar.";
+    });
+  </script>
+</body>
+</html>
